@@ -1,0 +1,7 @@
+{
+  "project": "传统老汤批次传承",
+  "records": [
+    {"id": "broth-lineage-main", "kind": "broth_batch", "temperature_c": 80, "ingredients": ["黄酱", "栀子", "香叶", "草果", "小茴香"], "generation": 326},
+    {"id": "cook-run-store-03", "kind": "cook_run", "broth_id": "broth-lineage-main", "products": ["甏肉", "狮子头", "豆腐泡"], "sensory_state": "review"}
+  ]
+}
