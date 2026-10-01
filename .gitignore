@@ -9,3 +9,8 @@ dist/
 build/
 coverage/
 .DS_Store
+
+# 运行时批次档案（由 seed 或服务生成）
+data/
+*.db.json
+.pytest_cache/

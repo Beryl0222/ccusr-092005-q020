@@ -3,5 +3,66 @@
   "records": [
     {"id": "broth-lineage-main", "kind": "broth_batch", "temperature_c": 80, "ingredients": ["黄酱", "栀子", "香叶", "草果", "小茴香"], "generation": 326},
     {"id": "cook-run-store-03", "kind": "cook_run", "broth_id": "broth-lineage-main", "products": ["甏肉", "狮子头", "豆腐泡"], "sensory_state": "review"}
+  ],
+  "stores": [
+    {"id": "store-01", "name": "济宁总店", "region": "济宁"},
+    {"id": "store-02", "name": "曲阜分店", "region": "曲阜"},
+    {"id": "store-03", "name": "兖州分店", "region": "兖州"},
+    {"id": "store-04", "name": "邹城分店", "region": "邹城"}
+  ],
+  "materials": [
+    {"id": "mat-pork-A", "kind": "meat", "name": "五花肉", "batch_no": "PORK-20260922-A", "supplier": "鲁西肉联", "origin_region": "山东聊城", "allergens": [], "received_at": "2026-09-22T05:00:00Z"},
+    {"id": "mat-meatball-A", "kind": "meat", "name": "狮子头预制馅", "batch_no": "MBL-20260923-A", "supplier": "鲁西肉联", "origin_region": "山东济宁", "allergens": ["鸡蛋", "小麦"], "received_at": "2026-09-23T05:00:00Z"},
+    {"id": "mat-tofu-A", "kind": "side", "name": "豆腐泡", "batch_no": "TOFU-20260924-A", "supplier": "曲阜豆制品社", "origin_region": "山东曲阜", "allergens": ["大豆"], "received_at": "2026-09-24T04:30:00Z"},
+    {"id": "mat-spice-326", "kind": "spice", "name": "第三百二十六料香料包", "batch_no": "SPC-326-20260920", "supplier": "老字号香料栈", "origin_region": "甘肃岷县", "allergens": ["小麦", "大豆"], "received_at": "2026-09-20T03:00:00Z"},
+    {"id": "mat-base-A", "kind": "base", "name": "猪骨基底汤", "batch_no": "BASE-20260925-A", "supplier": "中央厨房", "origin_region": "山东济宁", "allergens": [], "received_at": "2026-09-25T04:00:00Z"}
+  ],
+  "roots": [
+    {
+      "store_id": "store-01",
+      "broth_id": "broth-lineage-main",
+      "generation": 326,
+      "ingredients": ["黄酱", "栀子", "香叶", "草果", "小茴香"],
+      "recipe": {"unit": "克/十升", "ratios": {"黄酱": 150, "栀子": 20, "香叶": 6, "草果": 12, "小茴香": 18}},
+      "created_at": "2026-09-20T06:00:00Z",
+      "note": "一脉相承的总店老汤"
+    },
+    {
+      "store_id": "store-04",
+      "broth_id": "broth-store04-root",
+      "generation": 12,
+      "ingredients": ["酱油", "八角"],
+      "recipe": {"unit": "克/十升", "ratios": {"酱油": 120, "八角": 8}},
+      "created_at": "2026-09-18T06:00:00Z",
+      "note": "邹城店独立开坛，与总店老汤不同源（对照支系）"
+    }
+  ],
+  "events": [
+    {"event_id": "evt-s2-divide", "op": "divide", "store_id": "store-01", "actor": "周师傅", "occurred_at": "2026-09-23T07:30:00Z", "source_broth_ids": ["broth-lineage-main"], "child_broth_id": "broth-s2-0327", "note": "分装给曲阜店"},
+    {"event_id": "evt-s2-transfer", "op": "transfer", "store_id": "store-01", "actor": "周师傅", "occurred_at": "2026-09-23T07:50:00Z", "source_broth_ids": ["broth-s2-0327"], "target_store_id": "store-02"},
+    {"event_id": "evt-s2-refill", "op": "refill", "store_id": "store-02", "actor": "曲阜店当班", "occurred_at": "2026-09-24T06:00:00Z", "source_broth_ids": ["broth-s2-0327"], "child_broth_id": "broth-s2-0328", "materials": [{"material_id": "mat-spice-326", "qty": "1包"}, {"material_id": "mat-base-A", "qty": "5000毫升"}]},
+    {"event_id": "evt-s2-heat", "op": "heat", "store_id": "store-02", "actor": "曲阜店当班", "occurred_at": "2026-09-24T06:40:00Z", "source_broth_ids": ["broth-s2-0328"], "temperature_c": 80, "stage": "reach_80_add_ingredients", "note": "八十摄氏度下料"},
+    {"event_id": "evt-s2-cook", "op": "cook", "store_id": "store-02", "actor": "曲阜店当班", "occurred_at": "2026-09-24T07:00:00Z", "source_broth_ids": ["broth-s2-0328"], "product_id": "prod-s2-0924", "code": "SB-20260924-02", "items": ["甏肉", "狮子头", "豆腐泡"], "temperature_c": 80, "materials": [{"material_id": "mat-pork-A", "qty": "3000克"}, {"material_id": "mat-meatball-A", "qty": "2000克"}, {"material_id": "mat-tofu-A", "qty": "1000克"}]},
+
+    {"event_id": "evt-s3-divide", "op": "divide", "store_id": "store-01", "actor": "周师傅", "occurred_at": "2026-09-25T07:30:00Z", "source_broth_ids": ["broth-lineage-main"], "child_broth_id": "broth-s3-0327", "note": "分装给兖州店"},
+    {"event_id": "evt-s3-transfer", "op": "transfer", "store_id": "store-01", "actor": "周师傅", "occurred_at": "2026-09-25T08:00:00Z", "source_broth_ids": ["broth-s3-0327"], "target_store_id": "store-03"},
+    {"event_id": "evt-s3-refill", "op": "refill", "store_id": "store-03", "actor": "兖州店当班", "occurred_at": "2026-09-26T05:40:00Z", "source_broth_ids": ["broth-s3-0327"], "child_broth_id": "broth-s3-0328", "materials": [{"material_id": "mat-spice-326", "qty": "1包"}, {"material_id": "mat-base-A", "qty": "5000毫升"}]},
+    {"event_id": "evt-s3-heat", "op": "heat", "store_id": "store-03", "actor": "兖州店当班", "occurred_at": "2026-09-26T06:20:00Z", "source_broth_ids": ["broth-s3-0328"], "temperature_c": 80, "stage": "reach_80_add_ingredients"},
+    {"event_id": "evt-s3-cook", "op": "cook", "store_id": "store-03", "actor": "兖州店当班", "occurred_at": "2026-09-26T06:40:00Z", "source_broth_ids": ["broth-s3-0328"], "product_id": "prod-s3-0926", "code": "SB-20260926-03", "items": ["甏肉", "狮子头", "豆腐泡"], "temperature_c": 80, "materials": [{"material_id": "mat-pork-A", "qty": "3000克"}, {"material_id": "mat-meatball-A", "qty": "2000克"}, {"material_id": "mat-tofu-A", "qty": "1000克"}]},
+
+    {"event_id": "evt-s1-divide-merge", "op": "divide", "store_id": "store-01", "actor": "周师傅", "occurred_at": "2026-09-26T15:00:00Z", "source_broth_ids": ["broth-lineage-main"], "child_broth_id": "broth-s1-0329", "note": "再取一脉送往兖州并汤"},
+    {"event_id": "evt-s1-transfer-merge", "op": "transfer", "store_id": "store-01", "actor": "周师傅", "occurred_at": "2026-09-26T15:30:00Z", "source_broth_ids": ["broth-s1-0329"], "target_store_id": "store-03"},
+    {"event_id": "evt-s3-merge", "op": "merge", "store_id": "store-03", "actor": "兖州店当班", "occurred_at": "2026-09-27T05:30:00Z", "source_broth_ids": ["broth-s3-0328", "broth-s1-0329"], "child_broth_id": "broth-merge-0330", "note": "跨店合并：兖州续汤支系与总店新送支系并汤"},
+    {"event_id": "evt-s3-merge-heat", "op": "heat", "store_id": "store-03", "actor": "兖州店当班", "occurred_at": "2026-09-27T06:10:00Z", "source_broth_ids": ["broth-merge-0330"], "temperature_c": 80, "stage": "reach_80_add_ingredients"},
+    {"event_id": "evt-s3-cook-0927", "op": "cook", "store_id": "store-03", "actor": "兖州店当班", "occurred_at": "2026-09-27T06:30:00Z", "source_broth_ids": ["broth-merge-0330"], "product_id": "prod-s3-0927", "code": "SB-20260927-03", "items": ["甏肉", "狮子头"], "temperature_c": 80, "sensory_state": "review", "materials": [{"material_id": "mat-pork-A", "qty": "3000克"}, {"material_id": "mat-meatball-A", "qty": "2000克"}, {"material_id": "mat-tofu-A", "qty": "800克"}]},
+
+    {"event_id": "evt-s4-divide", "op": "divide", "store_id": "store-04", "actor": "邹城店当班", "occurred_at": "2026-09-25T06:00:00Z", "source_broth_ids": ["broth-store04-root"], "child_broth_id": "broth-s4-013"},
+    {"event_id": "evt-s4-heat", "op": "heat", "store_id": "store-04", "actor": "邹城店当班", "occurred_at": "2026-09-26T06:00:00Z", "source_broth_ids": ["broth-s4-013"], "temperature_c": 80, "stage": "reach_80_add_ingredients"},
+    {"event_id": "evt-s4-cook", "op": "cook", "store_id": "store-04", "actor": "邹城店当班", "occurred_at": "2026-09-26T06:30:00Z", "source_broth_ids": ["broth-s4-013"], "product_id": "prod-s4-0926", "code": "SB-20260926-04", "items": ["甏肉", "狮子头"], "temperature_c": 80, "materials": [{"material_id": "mat-pork-A", "qty": "2500克"}, {"material_id": "mat-meatball-A", "qty": "1500克"}]}
+  ],
+  "receives": [
+    {"broth_id": "broth-s2-0327", "at": "2026-09-23T09:10:00Z"},
+    {"broth_id": "broth-s3-0327", "at": "2026-09-25T09:30:00Z"},
+    {"broth_id": "broth-s1-0329", "at": "2026-09-26T17:00:00Z"}
   ]
 }
