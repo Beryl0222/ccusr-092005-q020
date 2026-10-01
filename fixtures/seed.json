@@ -3,5 +3,164 @@
   "records": [
     {"id": "broth-lineage-main", "kind": "broth_batch", "temperature_c": 80, "ingredients": ["黄酱", "栀子", "香叶", "草果", "小茴香"], "generation": 326},
     {"id": "cook-run-store-03", "kind": "cook_run", "broth_id": "broth-lineage-main", "products": ["甏肉", "狮子头", "豆腐泡"], "sensory_state": "review"}
+  ],
+  "stores": [
+    {"id": "store-01", "name": "竹竿巷总店"},
+    {"id": "store-02", "name": "城南分店"},
+    {"id": "store-03", "name": "高铁新城分店"}
+  ],
+  "ingredients": [
+    {"id": "ing-spice-s09", "category": "spice", "name": "香料包（栀子·香叶·草果·小茴香）", "supplier": "安顺香料行", "allergens": []},
+    {"id": "ing-sauce-j02", "category": "other", "name": "黄酱", "supplier": "济美酱园", "allergens": ["大豆", "麸质"]},
+    {"id": "ing-pork-p09", "category": "meat", "name": "五花肉", "supplier": "梁山定点屠宰批批检", "allergens": []},
+    {"id": "ing-meat-m09", "category": "meat", "name": "狮子头肉馅（含蛋液调制）", "supplier": "梁山定点屠宰批批检", "allergens": ["蛋"]},
+    {"id": "ing-tofu-t07", "category": "other", "name": "豆腐泡", "supplier": "老街豆制品坊", "allergens": ["大豆"]}
+  ],
+  "recipes": [
+    {"id": "recipe-beng-broth", "name": "甏肉老汤配方", "ratios": {"黄酱": 12.0, "栀子": 1.5, "香叶": 0.8, "草果": 1.2, "小茴香": 1.0, "老汤续补": 70.0}}
+  ],
+  "broths": [
+    {"id": "broth-lineage-main", "generation": 326, "store_id": "store-01", "note": "总店一脉老汤"},
+    {"id": "broth-store02-root", "generation": 210, "store_id": "store-02", "note": "城南分店自立支脉"}
+  ],
+  "events": [
+    {
+      "event_id": "evt-transfer-a-0918", "type": "transfer", "store_id": "store-01",
+      "actor": "张师傅", "role": "staff",
+      "occurred_at": "2026-09-18T08:00:00+08:00", "recorded_at": "2026-09-18T08:01:00+08:00",
+      "payload": {"parent_id": "broth-lineage-main", "child_id": "broth-a-t03", "to_store_id": "store-03"}
+    },
+    {
+      "event_id": "evt-receive-a-0918", "type": "receive", "store_id": "store-03",
+      "actor": "李店长", "role": "staff",
+      "occurred_at": "2026-09-18T15:30:00+08:00", "recorded_at": "2026-09-18T15:30:00+08:00",
+      "payload": {"broth_id": "broth-a-t03"}
+    },
+    {
+      "event_id": "evt-cook-0301", "type": "cook", "store_id": "store-03",
+      "actor": "李店长", "role": "staff",
+      "occurred_at": "2026-09-19T09:00:00+08:00", "recorded_at": "2026-09-19T09:05:00+08:00",
+      "payload": {
+        "cook_run_id": "cook-run-store-03", "broth_id": "broth-a-t03",
+        "recipe_id": "recipe-beng-broth", "temperature_c": 82,
+        "ingredients": [
+          {"batch_id": "ing-spice-s09", "role": "spice"},
+          {"batch_id": "ing-sauce-j02", "role": "other"},
+          {"batch_id": "ing-pork-p09", "role": "meat"},
+          {"batch_id": "ing-meat-m09", "role": "meat"},
+          {"batch_id": "ing-tofu-t07", "role": "side"}
+        ],
+        "products": [
+          {"id": "prod-beng-0919", "name": "甏肉"},
+          {"id": "prod-lion-0919", "name": "狮子头"},
+          {"id": "prod-tofu-0919", "name": "豆腐泡"}
+        ]
+      }
+    },
+    {
+      "event_id": "evt-topup-a2-0919", "type": "topup", "store_id": "store-01",
+      "actor": "传承人周师傅", "role": "master",
+      "occurred_at": "2026-09-19T16:00:00+08:00", "recorded_at": "2026-09-19T16:00:00+08:00",
+      "payload": {"parent_id": "broth-lineage-main", "child_id": "broth-main-g327", "store_id": "store-01"}
+    },
+    {
+      "event_id": "evt-cook-0102", "type": "cook", "store_id": "store-01",
+      "actor": "张师傅", "role": "staff",
+      "occurred_at": "2026-09-20T09:00:00+08:00", "recorded_at": "2026-09-20T09:02:00+08:00",
+      "payload": {
+        "cook_run_id": "cook-run-store-01-02", "broth_id": "broth-main-g327",
+        "recipe_id": "recipe-beng-broth", "temperature_c": 80,
+        "ingredients": [
+          {"batch_id": "ing-spice-s09", "role": "spice"},
+          {"batch_id": "ing-pork-p09", "role": "meat"}
+        ],
+        "products": [
+          {"id": "prod-beng-0920", "name": "甏肉"}
+        ]
+      }
+    },
+    {
+      "event_id": "evt-split-b-0920", "type": "split", "store_id": "store-02",
+      "actor": "王师傅", "role": "staff",
+      "occurred_at": "2026-09-20T10:00:00+08:00", "recorded_at": "2026-09-20T10:00:00+08:00",
+      "payload": {"parent_id": "broth-store02-root", "children": [{"id": "broth-b2", "store_id": "store-02"}]}
+    },
+    {
+      "event_id": "evt-transfer-b-0921", "type": "transfer", "store_id": "store-02",
+      "actor": "王师傅", "role": "staff",
+      "occurred_at": "2026-09-21T08:00:00+08:00", "recorded_at": "2026-09-21T18:40:00+08:00",
+      "payload": {"parent_id": "broth-b2", "child_id": "broth-b-t03", "to_store_id": "store-03"}
+    },
+    {
+      "event_id": "evt-receive-b-0921", "type": "receive", "store_id": "store-03",
+      "actor": "李店长", "role": "staff",
+      "occurred_at": "2026-09-21T14:00:00+08:00", "recorded_at": "2026-09-22T09:10:00+08:00",
+      "payload": {"broth_id": "broth-b-t03"}
+    },
+    {
+      "event_id": "evt-cook-b2-0922", "type": "cook", "store_id": "store-02",
+      "actor": "王师傅", "role": "staff",
+      "occurred_at": "2026-09-22T09:30:00+08:00", "recorded_at": "2026-09-22T19:00:00+08:00",
+      "payload": {
+        "cook_run_id": "cook-run-store-02-01", "broth_id": "broth-b2",
+        "temperature_c": 79,
+        "ingredients": [
+          {"batch_id": "ing-spice-s09", "role": "spice"},
+          {"batch_id": "ing-pork-p09", "role": "meat"}
+        ],
+        "products": [
+          {"id": "prod-beng-0922", "name": "甏肉"}
+        ]
+      }
+    },
+    {
+      "event_id": "evt-merge-m-0923", "type": "merge", "store_id": "store-03",
+      "actor": "李店长", "role": "staff",
+      "occurred_at": "2026-09-23T06:00:00+08:00", "recorded_at": "2026-09-23T18:30:00+08:00",
+      "payload": {"parent_ids": ["broth-a-t03", "broth-b-t03"], "child_id": "broth-merge-m1", "store_id": "store-03"}
+    },
+    {
+      "event_id": "evt-transfer-m2-0923", "type": "transfer", "store_id": "store-03",
+      "actor": "李店长", "role": "staff",
+      "occurred_at": "2026-09-23T14:00:00+08:00", "recorded_at": "2026-09-23T14:05:00+08:00",
+      "payload": {"parent_id": "broth-merge-m1", "child_id": "broth-m2-t01", "to_store_id": "store-01"}
+    },
+    {
+      "event_id": "evt-cook-m-0923", "type": "cook", "store_id": "store-03",
+      "actor": "李店长", "role": "staff",
+      "occurred_at": "2026-09-23T08:00:00+08:00", "recorded_at": "2026-09-23T18:31:00+08:00",
+      "payload": {
+        "cook_run_id": "cook-run-merge-0923", "broth_id": "broth-merge-m1",
+        "recipe_id": "recipe-beng-broth", "temperature_c": 80,
+        "ingredients": [
+          {"batch_id": "ing-spice-s09", "role": "spice"},
+          {"batch_id": "ing-sauce-j02", "role": "other"},
+          {"batch_id": "ing-pork-p09", "role": "meat"},
+          {"batch_id": "ing-meat-m09", "role": "meat"},
+          {"batch_id": "ing-tofu-t07", "role": "side"}
+        ],
+        "products": [
+          {"id": "prod-beng-0923", "name": "甏肉"},
+          {"id": "prod-lion-0923", "name": "狮子头"},
+          {"id": "prod-tofu-0923", "name": "豆腐泡"}
+        ]
+      }
+    }
+  ],
+  "tests": [
+    {
+      "id": "test-temp-m1", "target_type": "broth", "target_id": "broth-merge-m1",
+      "kind": "temperature", "verdict": "normal",
+      "occurred_at": "2026-09-23T08:10:00+08:00",
+      "detail": {"temperature_c": 81, "note": "下料温度符合八十摄氏度窗口"},
+      "recorder": "质控赵工", "role": "qc"
+    },
+    {
+      "id": "test-sensory-lion-0923", "target_type": "product", "target_id": "prod-lion-0923",
+      "kind": "sensory", "verdict": "abnormal",
+      "occurred_at": "2026-09-24T11:20:00+08:00",
+      "detail": {"complaint": "狮子头风味异常，与总店批次口感不一致", "panel": "异味复评成立"},
+      "recorder": "质控赵工", "role": "qc"
+    }
   ]
 }
